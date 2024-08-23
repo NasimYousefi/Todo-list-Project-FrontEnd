@@ -83,7 +83,7 @@ const handleSubmit = useCallback(async (e) => {
   if (isSubmitting) return;
 
   setIsSubmitting(true);
-  console.log('Form submitted');
+  
 
   const taskData = {
     title,
@@ -93,8 +93,7 @@ const handleSubmit = useCallback(async (e) => {
   };
 
   delete taskData.id;
-  console.log('Sending task data:', taskData);
-  console.log('Current client time:', new Date().toString());
+  
 
   try {
     let response;
@@ -105,7 +104,7 @@ const handleSubmit = useCallback(async (e) => {
         }
       });
     } else {
-      console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+      
       response = await axios.post('/tasks', taskData, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -113,18 +112,18 @@ const handleSubmit = useCallback(async (e) => {
       });
     }
 
-    console.log('Received response:', response);
+   
 
     if (response.status === 200 || response.status === 201) {
       const updatedTask = response.data;
-      console.log(updatedTask.due_date);
+      
       if (updatedTask.due_date) {
         updatedTask.due_date = updatedTask.due_date.split('T')[0];
       }
       if (onSubmit) {
-        console.log('onSubmit is being called with:', updatedTask);
+        
         onSubmit(updatedTask);
-        console.log('onCancel is being called');
+        
         onCancel();
       }
     }
@@ -190,9 +189,9 @@ const handleSubmit = useCallback(async (e) => {
       </style> */}
 
 <style>
-        {/* Styles for text fields (already defined in pinkTheme) */}
+        
         {Object.keys(pinkTheme).map((key) => `${key} { ${pinkTheme[key]} }`)}
-        {/* Styles for the calendar (defined in calendarTheme) */}
+        
         {Object.keys(calendarTheme).map((key) => `${key} { ${calendarTheme[key]} }`)}
       </style>
     <Box component="form" onSubmit={handleSubmit} className="space-y-4">

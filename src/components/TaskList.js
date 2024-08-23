@@ -33,6 +33,8 @@ const TaskList = () => {
   const handleDelete = useCallback(
     async (taskId) => {
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+      
+      
       await axios.delete(`/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
