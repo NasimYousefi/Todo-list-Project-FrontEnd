@@ -5,6 +5,7 @@ import { Box, TextField, Button, Typography } from '@mui/material';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from '../axiosConfig';
+import styled from 'styled-components';
 
 const EditTask = () => {
   const { id } = useParams();
@@ -53,6 +54,25 @@ const EditTask = () => {
     return <Typography>Loading...</Typography>;
   }
 
+
+
+  // Custom styled datepicker wrapper
+const StyledDatePickerWrapper = styled.div`
+.react-datepicker__header {
+   background-color: #FBCFE8; 
+ }
+
+ .react-datepicker__day--selected,
+ .react-datepicker__day--keyboard-selected {
+   background-color: #db2777 !important;
+   color: white; 
+ }
+
+ .react-datepicker__day:hover {
+   background-color: #FCE7F3 !important;
+   color: #db2777 !important; 
+ 
+`;
   return (
     <Box className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
       <Typography variant="h5" className="text-center mb-4">Edit Task</Typography>
@@ -91,6 +111,7 @@ const EditTask = () => {
             },
           }}
         />
+        <StyledDatePickerWrapper>
         <DatePicker
           selected={dueDate}
           onChange={(date) => setDueDate(date)}
@@ -110,6 +131,7 @@ const EditTask = () => {
           isClearable
           
         />
+        </StyledDatePickerWrapper>
         <Box className="flex justify-end space-x-2">
           <Button onClick={handleCancel} variant="outlined"
            sx={{ 

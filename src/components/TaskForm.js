@@ -4,6 +4,7 @@ import { TextField, Button, Box } from '@mui/material';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from '../axiosConfig';
+import styled from 'styled-components';
 // import { useNavigate } from 'react-router-dom';
 
 const TaskForm = ({ initialTask = {}, onSubmit, onCancel }) => {
@@ -161,18 +162,37 @@ const handleSubmit = useCallback(async (e) => {
     },
   };
 
-  const calendarTheme = {
-    // Styles for the custom datepicker class
-    '.custom-datepicker .react-datepicker__day--selected,': {
-      backgroundColor: '#DB2777 !important', // Pink background for selected date
-    },
-    '.custom-datepicker .react-datepicker__day--keyboard-selected': {
-      backgroundColor: '#DB2777 !important', // Pink background for keyboard-selected date
-    },
-    '.custom-datepicker .react-datepicker__day:hover': {
-      backgroundColor: '#FEEDE9 !important', // Light pink background on hover
-    },
-  };
+  // const calendarTheme = {
+  //   // Styles for the custom datepicker class
+  //   '.custom-datepicker .react-datepicker__day--selected,': {
+  //     backgroundColor: '#DB2777 !important', // Pink background for selected date
+  //   },
+  //   '.custom-datepicker .react-datepicker__day--keyboard-selected': {
+  //     backgroundColor: '#DB2777 !important', // Pink background for keyboard-selected date
+  //   },
+  //   '.custom-datepicker .react-datepicker__day:hover': {
+  //     backgroundColor: '#FEEDE9 !important', // Light pink background on hover
+  //   },
+  // };
+
+// Custom styled datepicker wrapper
+const StyledDatePickerWrapper = styled.div`
+ .react-datepicker__header {
+    background-color: #FBCFE8; 
+  }
+
+  .react-datepicker__day--selected,
+  .react-datepicker__day--keyboard-selected {
+    background-color: #db2777 !important;
+    color: white; 
+  }
+
+  .react-datepicker__day:hover {
+    background-color: #FCE7F3 !important;
+    color: #db2777 !important; 
+  
+`;
+
   return (
     <>
       {/* <style>
@@ -188,12 +208,12 @@ const handleSubmit = useCallback(async (e) => {
         `}
       </style> */}
 
-<style>
+{/* <style>
         
         {Object.keys(pinkTheme).map((key) => `${key} { ${pinkTheme[key]} }`)}
         
         {Object.keys(calendarTheme).map((key) => `${key} { ${calendarTheme[key]} }`)}
-      </style>
+      </style> */}
     <Box component="form" onSubmit={handleSubmit} className="space-y-4">
       <TextField
         fullWidth
@@ -213,13 +233,16 @@ const handleSubmit = useCallback(async (e) => {
         onChange={(e) => setDescription(e.target.value)}
         sx={pinkTheme}
       />
+
+<StyledDatePickerWrapper>
       <DatePicker
         selected={dueDate}
         onChange={(date) => setDueDate(date)}
         customInput={<TextField fullWidth label="Due Date" sx={pinkTheme} />}
         dateFormat="MMMM d, yyyy"
-         wrapperClassName="custom-datepicker"
+        //  wrapperClassName="custom-datepicker"
       />
+      </StyledDatePickerWrapper>
       <Box className="space-x-2">
         <Button variant="contained"  type="submit"
          sx={{
