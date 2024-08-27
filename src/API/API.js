@@ -17,7 +17,7 @@ export function Delete(url, data = {}, content_type = '') {
 }
 
 export const URLS = {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3000/api',
 };
 
 async function request(method, url, data = {}, content_type = '') {
